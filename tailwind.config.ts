@@ -8,9 +8,15 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      maxWidth:{
+        'container': '77.5rem',
+      },
+      colors:{
+        'bg-wht': '#D9D9D9',
+        'bg-bl':'#050505'
+      },
+      borderRadius:{
+        'rounded':'7.5rem',
       },
     },
   },
