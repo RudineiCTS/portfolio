@@ -1,7 +1,10 @@
+import { CardItem } from "@/components/CardComponent/cardItem";
+import { CarouselComponent } from "@/components/Carousel/CarouselComponent";
 import BackgroundContainer from "@/components/background";
 import { Container } from "@/components/container";
 import { GroupIconContainer } from "@/components/layoutContainer/groupIconContainer";
 import { LayoutContainer } from "@/components/layoutContainer/layoutContainer";
+import { toolsListItem } from "@/utils/listCardItem";
 import Image from "next/image";
 
 export default function Home() {
@@ -37,13 +40,15 @@ export default function Home() {
           <div className="w-2"></div>
         </LayoutContainer>
       </BackgroundContainer>
-      <LayoutContainer className="w-full flex justify-between max-w-container mt-8">
-        <Image
-          src={"/modelo.png"}
-          width={350}
-          alt="imagem do perfil"
-          height={200}
-        />
+      <LayoutContainer className="grid grid-cols-2 max-w-container">
+        <div className="">
+          <Image
+            src={"/modelo.png"}
+            width={350}
+            alt="imagem do perfil"
+            height={200}
+          />
+        </div>
         <div className="flex flex-col gap-3   w-full text-bg-wht w-2/4">
           <h1 className="text-bg-wht text-4xl">Sobre Mim!</h1>
           <p className=" flex flex-nowrap">
@@ -69,66 +74,37 @@ export default function Home() {
       <LayoutContainer className="w-full flex flex-col justify-center  max-w-container mt-8">
         <div className="text-bg-wht flex flex-col gap-16">
           <h1 className=" text-4xl text-center">Ferramentas</h1>
-          <p className="text-center"> Ferramentas que utilzo no meu dia a dia, para estudos e trabalhos.</p>
+          <p className="text-center">
+            {" "}
+            Ferramentas que utilzo no meu dia a dia, para estudos e trabalhos.
+          </p>
         </div>
 
         <div className="grid grid-cols-3 gap-8 my-10">
+          <CardItem srcImage="/react.webp" alt="" title="" />
+          <CardItem srcImage="/node.webp" alt="" title="" />
+          <CardItem srcImage="/next.webp" alt="" title="" /> */
+        </div>
+        {/* <CarouselComponent 
+            list={toolsListItem}
+         /> */}
+      </LayoutContainer>
+      <LayoutContainer className="flex items-center justify-center text-bg-wht max-w-container w-full flex-col">
+        <div className=" flex flex-col justify-center items-center gap-5">
+          <h1 className="text-4xl text-center mb-9">Projetos</h1>
 
-        <div className="w-60 border-slate-500 border-2">
-          <div className="bg-red-400 flex items-center justify-center">
-            <Image src="/vsicon.png" width={100} height={100} alt="imagem da ferramenta" style={{objectFit: "fill"}}/>
-          </div>
-          <span  className="text-bg-wht">
-            <strong className="text-xl">VSCODE</strong>
-            <p className="text-gray-500">Editor de Texto</p>
-          </span>
-        </div>
-        <div className="w-60 border-slate-500 border-2">
-          <div className="bg-red-400 flex items-center justify-center">
-            <Image src="/vsicon.png" width={100} height={100} alt="imagem da ferramenta" style={{objectFit: "fill"}}/>
-          </div>
-          <span  className="text-bg-wht">
-            <strong className="text-xl">VSCODE</strong>
-            <p className="text-gray-500">Editor de Texto</p>
-          </span>
-        </div>
-        <div className="w-60 border-slate-500 border-2">
-          <div className="bg-red-400 flex items-center justify-center">
-            <Image src="/vsicon.png" width={100} height={100} alt="imagem da ferramenta" style={{objectFit: "fill"}}/>
-          </div>
-          <span  className="text-bg-wht">
-            <strong className="text-xl">VSCODE</strong>
-            <p className="text-gray-500">Editor de Texto</p>
-          </span>
-        </div>
-        <div className="w-60 border-slate-500 border-2">
-          <div className="bg-red-400 flex items-center justify-center">
-            <Image src="/vsicon.png" width={100} height={100} alt="imagem da ferramenta" style={{objectFit: "fill"}}/>
-          </div>
-          <span  className="text-bg-wht">
-            <strong className="text-xl">VSCODE</strong>
-            <p className="text-gray-500">Editor de Texto</p>
-          </span>
-        </div>
-        <div className="w-60 border-slate-500 border-2">
-          <div className="bg-red-400 flex items-center justify-center">
-            <Image src="/vsicon.png" width={100} height={100} alt="imagem da ferramenta" style={{objectFit: "fill"}}/>
-          </div>
-          <span  className="text-bg-wht">
-            <strong className="text-xl">VSCODE</strong>
-            <p className="text-gray-500">Editor de Texto</p>
-          </span>
-        </div>
-        <div className="w-60 border-slate-500 border-2">
-          <div className="bg-red-400 flex items-center justify-center">
-            <Image src="/vsicon.png" width={100} height={100} alt="imagem da ferramenta" style={{objectFit: "fill"}}/>
-          </div>
-          <span  className="text-bg-wht">
-            <strong className="text-xl">VSCODE</strong>
-            <p className="text-gray-500">Editor de Texto</p>
-          </span>
-        </div>
-
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+            possimus voluptas recusandae amet dignissimos? Optio, cum, magni
+            omnis voluptas eligendi, non iusto illum tenetur molestiae earum
+            distinctio itaque libero natus?
+          </p>
+          <Image
+            alt="icone de construção"
+            width={250}
+            height={250}
+            src="/building.webp"
+          ></Image>
         </div>
       </LayoutContainer>
     </Container>
