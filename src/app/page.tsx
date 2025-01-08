@@ -4,7 +4,7 @@ import BackgroundContainer from "@/components/background";
 import { Container } from "@/components/container";
 import { GroupIconContainer } from "@/components/layoutContainer/groupIconContainer";
 import { LayoutContainer } from "@/components/layoutContainer/layoutContainer";
-import { toolsListItem } from "@/utils/listCardItem";
+// import { toolsListItem } from "@/utils/listCardItem";
 import Image from "next/image";
 
 export default function Home() {
