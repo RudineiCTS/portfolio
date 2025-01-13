@@ -7,7 +7,7 @@ interface ContainerProps{
 
 export function Container({children, className }:ContainerProps){
     return (
-        <div className={twMerge(['flex flex-col md: max-w-full max-h-full py-10 items-center', className])}>
+        <div className={twMerge(['flex flex-col md: max-w-full max-h-full  items-center', className])}>
             {children}
         </div>
     )

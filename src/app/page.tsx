@@ -1,15 +1,30 @@
+'use client'
 import { CardItem } from "@/components/CardComponent/cardItem";
+import { CardHorizontal } from "@/components/CardHorizontal";
 import { CarouselComponent } from "@/components/Carousel/CarouselComponent";
 import BackgroundContainer from "@/components/background";
 import { Container } from "@/components/container";
 import { GroupIconContainer } from "@/components/layoutContainer/groupIconContainer";
 import { LayoutContainer } from "@/components/layoutContainer/layoutContainer";
+import { fetchRepositories } from "@/service/api-github";
+import { RepositoryType } from "@/utils/repositoryType";
 // import { toolsListItem } from "@/utils/listCardItem";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [repositories, setRepositories] = useState<RepositoryType[]>([]);
+
+  async function getAllRepositories(){
+    const listRepository = await fetchRepositories()
+    setRepositories(listRepository);
+  }
+  useEffect(()=>{
+    getAllRepositories();
+  },[])
+
   return (
-    <Container>
+    <Container className="pb-28">
       <BackgroundContainer>
         <LayoutContainer className="flex flex-col h-full items-center justify-center max-w-container sm:max-w-full sm:m-5 ">
           <section className="md:flex md:flex-row md:justify-between items-center justify-center flex flex-col-reverse">
@@ -89,19 +104,18 @@ export default function Home() {
             list={toolsListItem}
          /> */}
       </LayoutContainer>
-      <LayoutContainer className="flex items-center justify-center text-bg-wht max-w-container w-full flex-col">
-        <div className=" flex flex-col justify-center items-center gap-5">
-          <h1 className=" mb-9  md:text-4xl sm:text-2xl text-center">Projetos</h1>
-          <p className="text-base text-center md:m-auto m-9">
-          Peço desculpas, este portfólio ainda está em desenvolvimento e, por isso, ainda não tive tempo de subir os projetos da API do GitHub. Preciso selecionar alguns projetos para listar aqui!
-          </p>
-          <Image
-            alt="icone de construção"
-            width={250}
-            height={250}
-            src="/building.webp"
-          ></Image>
+      <LayoutContainer className="flex items-center justify-center text-bg-wht max-w-container w-full flex-col pb-12">
+        <div className="m-8">
+          <h1 className="text-bg-wht md:text-4xl text-2xl">Meu Repositórios</h1>
         </div>
+        {repositories.map((repo) => {
+          return (
+            <CardHorizontal
+              repository={repo}
+              key={repo.id}
+            />
+          )
+        })}
       </LayoutContainer>
     </Container>
   );
