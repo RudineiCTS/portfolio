@@ -7,6 +7,7 @@ import { Container } from "@/components/container";
 import { GroupIconContainer } from "@/components/layoutContainer/groupIconContainer";
 import { LayoutContainer } from "@/components/layoutContainer/layoutContainer";
 import { fetchRepositories } from "@/service/api-github";
+import { PaginationType } from "@/utils/paginationTypes";
 import { RepositoryType } from "@/utils/repositoryType";
 // import { toolsListItem } from "@/utils/listCardItem";
 import Image from "next/image";
@@ -14,14 +15,44 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [repositories, setRepositories] = useState<RepositoryType[]>([]);
+  const [repositoriesShow, setRepositoriesShow] = useState<RepositoryType[]>([]);
+  const [pagination, setPagination] =useState<PaginationType>({currentPage:0,totalPages:0,});
 
   async function getAllRepositories(){
     const listRepository = await fetchRepositories()
     setRepositories(listRepository);
+    setPagination({
+      currentPage: 0,
+      totalPages:Math.trunc(repositories.length / 3)
+    });
+
   }
-  useEffect(()=>{
-    getAllRepositories();
-  },[])
+
+  function handleNextPage(){
+    const currentPage = pagination.currentPage!;
+    const indexPage = currentPage + 1;
+    const totalPages = pagination.totalPages!;
+    if(indexPage < totalPages){
+      switchRepositories(indexPage);
+    }
+  }
+  function switchRepositories(currentPage?: number){
+    if(currentPage === undefined){
+      const repositoriesToShow =repositories.slice(3)
+      setRepositoriesShow(repositoriesToShow);
+      console.log(repositoriesToShow)
+      setPagination({...pagination, currentPage:currentPage || 1});
+    }
+  }
+  useEffect(() => {
+    // Criando uma função assíncrona dentro do useEffect
+    const fetchDataAndSwitch = async () => {
+      await getAllRepositories(); // Espera `getAllRepositories` ser concluído
+      switchRepositories(); // Chama `switchRepositories` depois
+    };
+  
+    fetchDataAndSwitch(); // Invoca a função
+  }, []);
 
   return (
     <Container className="pb-28">
@@ -39,7 +70,7 @@ export default function Home() {
                 </h1>
                 <p className="md:text-xl flex-nowrap mt-3 sm:text-base ">
                   Software Engineer | Front End | Back End | JavaScript |
-                  TypeScript | NextJs | ReactJS | TailwindCSS | NodeJS
+                  TypeScript | NextJs | ReactJS | TailwindCSS | NodeJS | <a href="https://frosted-eyebrow-466.notion.site/SQL-COMANDS-1686cb3646e280388e82e52312b2069e">SQL</a>
                 </p>
                 <GroupIconContainer />
               </div>
@@ -108,7 +139,7 @@ export default function Home() {
         <div className="m-8">
           <h1 className="text-bg-wht md:text-4xl text-2xl">Meu Repositórios</h1>
         </div>
-        {repositories.map((repo) => {
+        {repositoriesShow.map((repo) => {
           return (
             <CardHorizontal
               repository={repo}
@@ -116,6 +147,7 @@ export default function Home() {
             />
           )
         })}
+        <button onClick={()=>{handleNextPage} }>clique aqui</button>
       </LayoutContainer>
     </Container>
   );
